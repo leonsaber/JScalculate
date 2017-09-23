@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Calculate</title>
+
+<script>
+
+function calculate(x){
+
+var arrayA = x.split(separator=" ");
+
+/*for(var i = 0; i < user.length; i++) {
+	arrayA.push(user[i]);
+}*/
+
+// if first element is "-" 
+function nag(){
+
+for(var i=0; i<=length; i++){
+	
+if(arrayA[i]==="-"){
+		arrayA.splice(i,2,0-arrayA[i+1]);
+			}
+	}
+}
+nag();
+
+var mul=function(){
+    
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="*"){
+        arrayA.splice(i-1,3,arrayA[i-1]*arrayA[i+1]);
+         mul();
+         }
+   
+    }
+}
+mul();
+
+var div=function(){
+    
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="/"){
+        arrayA.splice(i-1,3,arrayA[i-1]/arrayA[i+1]);
+         div();
+         }
+   
+    }
+}
+div();
+
+
+var add=function(){
+    
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="+"){
+        arrayA.splice(i-1,3, Number(arrayA[i-1]) +Number(arrayA[i+1]));
+         add();
+         }
+   
+    }
+}
+add();
+//Remember parseInt is make String to Int that is why I got wrong result!
+// if I still use this way:
+/*var add=function(){
+    
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="+"){
+        arrayA.splice(i-1,3, (-1) * (0 - arrayA[i-1] - arrayA[i+1]));
+         add();
+         }
+   
+    }
+}
+add();
+*/
+var sub=function(){
+	
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="-"){
+		
+        arrayA.splice(i-1,3,arrayA[i-1]-arrayA[i+1]);
+         sub();
+         }
+   
+    }
+}
+sub();
+
+/*var nag=function(){
+    
+    for(var i = 0; i<= arrayA.length; i++){
+    if(arrayA[i]==="-"){
+        arrayA.splice(i,2,0-arrayA[i+1]);
+         nag();
+         }
+   
+    }
+}
+nag();*/
+
+
+
+
+document.getElementById("result").innerHTML=arrayA;
+	}
+</script>
+
+</head>
+
+<body>
+
+<form>
+<input type="text" onkeyup="calculate(this.value)" placeholder="example:1 + 1"/>
+</form>
+
+<p id="result"> </p>
+</body>
+</html>
